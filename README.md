@@ -30,3 +30,6 @@ Maybe: Date Applied
     - /posts/:id .put - Update Post
     - /posts/:id .delete - Delete Post
     - /posts/:id .get - Show One Post
+
+## Live Site
+[Live Site](https://jobify-api-1ge6.onrender.com/)
