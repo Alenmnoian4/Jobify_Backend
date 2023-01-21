@@ -14,7 +14,7 @@ This API will store the job information that users input into the website.
 - NodeJS
 - To Be Deployed on Render.com
 
-## Schema
+## Model(s)
 Job Role: String
 Job Details: String
 Location: String
@@ -24,8 +24,9 @@ Job Type (Example: Full-time, Part-Time, Internship, Contract, etc.): String
 Salary Range (Example: $50k - $70k, $70k - $90k, $90k - $110k, $110k - $130k, $130k - $150k, $150k - $170k, etc.): String
 Maybe: Date Applied
 
-## Features
-- Create
-- Read
-- Update
-- Delete
+## Routes
+- /posts .get - All Posts
+    - /posts .post - Create Post
+    - /posts/:id .put - Update Post
+    - /posts/:id .delete - Delete Post
+    - /posts/:id .get - Show One Post
