@@ -13,12 +13,28 @@ mongoose.connect(DATABASE_URL, {
   useNewUrlParser: true,
 });
 
+// Register Middleware
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
+
+
+
 mongoose.connection
   .on("open", () => console.log("Your are connected to mongoose"))
   .on("close", () => console.log("Your are disconnected from mongoose"))
   .on("error", (error) => console.log(error));
 
+  const PostsSchema = new mongoose.Schema({
+    role: String,
+    details: String,
+    location: String,
+    onsite: String,
+    appURL: String,
+    type: String,
+    salary: String,
+})  
 
+const Post = mongoose.model("Post", PostsSchema)
 //--------------------------------------
 // routes
 //--------------------------------------
@@ -36,20 +52,42 @@ app.get("/", (req, res) => {
     }
   });
 
-  app.get("/posts/:id", async (req, res) => {
-    try {
-      res.json(await Post.findById(req.params.id));
-    } catch (error) {
+
+// Create Route
+app.post("/posts", async (req, res) => {
+  try{
+res.json(await Post.create(req.body))
+  }catch(error){
+      res.status(400).json(error)
+  }
+})
+
+// Update Route
+app.put('/posts/:id', async (req, res) => {
+  try {
+      res.json(await Post.findByIdAndUpdate(req.params.id, req.body, {new: true}))
+  } catch (error) {
+      res.status(400).json(error)
+  }
+})
+
+// Delete Route
+app.delete('/posts/:id', async (req, res) => {
+  try {
+      res.json(await Post.findByIdAndRemove(req.params.id))
+  } catch (error) {
+      res.status(400).json(error)
+  }
+})
+
+// Show Route
+app.get("/posts/:id", async (req, res) => {
+  try {
+      res.json(await Post.findById(req.params.id))
+  } catch (error) {
       res.status(400).json(error);
-    }
-  });
-
-
-
-
-
-
-
+  }
+})
 
 
   // listener
