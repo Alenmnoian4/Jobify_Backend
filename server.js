@@ -16,6 +16,7 @@ mongoose.connect(DATABASE_URL, {
 // Register Middleware
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+app.use(cors())
 
 
 
